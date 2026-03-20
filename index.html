@@ -23,7 +23,6 @@ body {
   color: white;
 }
 
-/* FUNDO ANIMADO */
 canvas {
   position: fixed;
   top: 0;
@@ -31,7 +30,6 @@ canvas {
   z-index: 0;
 }
 
-/* CARD */
 .container {
   position: relative;
   z-index: 2;
@@ -48,7 +46,6 @@ canvas {
   transition: transform 0.2s;
 }
 
-/* LOGO */
 .logo {
   width: 150px;
   margin-bottom: 10px;
@@ -62,13 +59,13 @@ canvas {
 }
 
 h1 { font-size: 24px; }
+
 p {
   font-size: 14px;
   color: #94a3b8;
   margin-bottom: 25px;
 }
 
-/* LINKS */
 .links {
   display: flex;
   flex-direction: column;
@@ -82,15 +79,63 @@ p {
   text-decoration: none;
   color: white;
   font-weight: 600;
+  overflow: hidden;
+  transition: 0.25s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
   background: linear-gradient(145deg, rgba(15,23,42,0.9), rgba(30,41,59,0.6));
   border: 1px solid rgba(59,130,246,0.2);
-  overflow: hidden;
-  transition: 0.2s;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+  top: 0;
+  left: -120%;
+  transition: 0.6s;
+}
+
+.link:hover::after {
+  left: 120%;
 }
 
 .link:hover {
   transform: translateY(-3px) scale(1.03);
+}
+
+.link:active {
+  transform: scale(0.96);
+}
+
+.link svg {
+  transition: 0.3s;
+}
+
+.link:hover svg {
+  transform: scale(1.2) rotate(5deg);
+}
+
+/* CORES */
+.link:nth-child(1):hover {
+  box-shadow: 0 0 25px #25D366;
+  border-color: #25D366;
+}
+
+.link:nth-child(2):hover {
+  box-shadow: 0 0 25px #E1306C;
+  border-color: #E1306C;
+}
+
+.link:nth-child(3):hover {
   box-shadow: 0 0 25px #3b82f6;
+  border-color: #3b82f6;
 }
 
 /* ripple */
@@ -99,7 +144,7 @@ p {
   border-radius: 50%;
   transform: scale(0);
   animation: ripple 0.6s linear;
-  background: rgba(59,130,246,0.6);
+  background: rgba(59,130,246,0.5);
 }
 
 @keyframes ripple {
@@ -129,11 +174,31 @@ p {
   <p>Assistência técnica em celular e PC</p>
 
   <div class="links">
-    <a class="link" href="https://wa.me/5587981750054?text=Olá,%20quero%20um%20orçamento" target="_blank">📱 Falar no WhatsApp</a>
-    <a class="link" href="https://instagram.com/mackson.technology" target="_blank">📸 Instagram</a>
-    <a class="link" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDg4ODYyMjAxMTM3MTgy?igsh=MXFyZXgzejl5enRzbg==" target="_blank">
-      🚀 Serviços Finalizados
+
+    <a class="link" href="https://wa.me/5587981750054?text=Olá,%20quero%20um%20orçamento" target="_blank">
+      <!-- WhatsApp -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#25D366" viewBox="0 0 24 24">
+        <path d="M20.52 3.48A11.82 11.82 0 0 0 12.05 0C5.43 0 .07 5.36.07 11.98c0 2.11.55 4.17 1.6 5.98L0 24l6.21-1.63a11.93 11.93 0 0 0 5.84 1.49h.01c6.62 0 11.98-5.36 11.98-11.98 0-3.2-1.25-6.21-3.52-8.4z"/>
+      </svg>
+      WhatsApp
     </a>
+
+    <a class="link" href="https://instagram.com/mackson.technology" target="_blank">
+      <!-- Instagram -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#E1306C" viewBox="0 0 24 24">
+        <path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5z"/>
+      </svg>
+      Instagram
+    </a>
+
+    <a class="link" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDg4ODYyMjAxMTM3MTgy?igsh=MXFyZXgzejl5enRzbg==" target="_blank">
+      <!-- Verificado -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#3b82f6" viewBox="0 0 24 24">
+        <path d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 20 12 16.9 5.82 20 7 12.14 2 7.27z"/>
+      </svg>
+      Serviços Finalizados
+    </a>
+
   </div>
 
   <div class="footer">
@@ -143,7 +208,7 @@ p {
 </div>
 
 <script>
-// PARTICULAS FUNDO
+// FUNDO PARTICULAS
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
@@ -192,14 +257,13 @@ document.addEventListener("mousemove", (e) => {
   card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
 });
 
-// RIPPLE CLICK
+// RIPPLE
 document.querySelectorAll(".link").forEach(btn => {
   btn.addEventListener("click", function(e) {
     let ripple = document.createElement("span");
     ripple.style.left = e.offsetX + "px";
     ripple.style.top = e.offsetY + "px";
     this.appendChild(ripple);
-
     setTimeout(() => ripple.remove(), 600);
   });
 });
