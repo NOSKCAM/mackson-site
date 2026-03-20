@@ -1,135 +1,209 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mackson Technology</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mackson Technology</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
 
-    body {
-      background: radial-gradient(circle at top, #0f172a, #020617);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
-    }
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #020617;
+  overflow: hidden;
+  color: white;
+}
 
-    .container {
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      animation: fadeIn 1.5s ease;
-    }
+/* FUNDO ANIMADO */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
 
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
+/* CARD */
+.container {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 380px;
+  padding: 30px 20px;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(59,130,246,0.2);
+  box-shadow: 0 0 50px rgba(59,130,246,0.2);
+  transform-style: preserve-3d;
+  transition: transform 0.2s;
+}
 
-    .logo {
-      width: 160px;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 0 10px #3b82f6)
-              drop-shadow(0 0 25px #3b82f6);
-      animation: pulse 2.5s infinite ease-in-out;
-    }
+/* LOGO */
+.logo {
+  width: 150px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 20px #3b82f6);
+  animation: float 3s ease-in-out infinite;
+}
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1);}
-      50% { transform: scale(1.05);}
-    }
+@keyframes float {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-8px);}
+}
 
-    h1 {
-      font-size: 24px;
-      margin-top: 10px;
-      letter-spacing: 1px;
-    }
+h1 { font-size: 24px; }
+p {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 25px;
+}
 
-    p {
-      font-size: 14px;
-      color: #94a3b8;
-      margin-bottom: 25px;
-    }
+/* LINKS */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+.link {
+  position: relative;
+  padding: 16px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  background: linear-gradient(145deg, rgba(15,23,42,0.9), rgba(30,41,59,0.6));
+  border: 1px solid rgba(59,130,246,0.2);
+  overflow: hidden;
+  transition: 0.2s;
+}
 
-    .link {
-      position: relative;
-      padding: 15px;
-      border-radius: 14px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      backdrop-filter: blur(10px);
-      transition: 0.3s;
-      overflow: hidden;
-    }
+.link:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 25px #3b82f6;
+}
 
-    .link::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(59,130,246,0.6), transparent);
-      top: 0;
-      left: -100%;
-      transition: 0.5s;
-    }
+/* ripple */
+.link span {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  background: rgba(59,130,246,0.6);
+}
 
-    .link:hover::before {
-      left: 100%;
-    }
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
 
-    .link:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #3b82f6;
-    }
-
-    .footer {
-      margin-top: 25px;
-      font-size: 12px;
-      color: #64748b;
-    }
-  </style>
+.footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #64748b;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="container">
+<canvas id="bg"></canvas>
 
-    <!-- SUA LOGO -->
-    <img class="logo" src="logo.png" alt="Mackson Technology">
+<div class="container" id="card">
 
-    <h1>Mackson Technology</h1>
-    <p>Assistência técnica em celular e PC</p>
+  <img class="logo" src="logo.png">
 
-    <div class="links">
-      <a class="link" href="https://wa.me/5587981750054" target="_blank">📱 Falar no WhatsApp</a>
-      <a class="link" href="https://instagram.com/mackson.technology" target="_blank">📸 Instagram</a>
-      <a class="link" href="#">💻 Serviços</a>
-      <a class="link" href="#">⚡ Formatação</a>
-      <a class="link" href="#">🔧 Manutenção</a>
-    </div>
+  <h1>Mackson Technology</h1>
+  <p>Assistência técnica em celular e PC</p>
 
-    <div class="footer">
-      © 2026 Mackson Technology
-    </div>
-
+  <div class="links">
+    <a class="link" href="https://wa.me/5587981750054?text=Olá,%20quero%20um%20orçamento" target="_blank">📱 Falar no WhatsApp</a>
+    <a class="link" href="https://instagram.com/mackson.technology" target="_blank">📸 Instagram</a>
+    <a class="link" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDg4ODYyMjAxMTM3MTgy?igsh=MXFyZXgzejl5enRzbg==" target="_blank">
+      🚀 Serviços Finalizados
+    </a>
   </div>
+
+  <div class="footer">
+    © 2026 Mackson Technology
+  </div>
+
+</div>
+
+<script>
+// PARTICULAS FUNDO
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2,
+    dx: (Math.random() - 0.5),
+    dy: (Math.random() - 0.5)
+  });
+}
+
+function animate() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  particles.forEach(p => {
+    p.x += p.dx;
+    p.y += p.dy;
+
+    if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fillStyle = "#3b82f6";
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// PARALLAX
+const card = document.getElementById("card");
+
+document.addEventListener("mousemove", (e) => {
+  let x = (window.innerWidth / 2 - e.clientX) / 25;
+  let y = (window.innerHeight / 2 - e.clientY) / 25;
+  card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+});
+
+// RIPPLE CLICK
+document.querySelectorAll(".link").forEach(btn => {
+  btn.addEventListener("click", function(e) {
+    let ripple = document.createElement("span");
+    ripple.style.left = e.offsetX + "px";
+    ripple.style.top = e.offsetY + "px";
+    this.appendChild(ripple);
+
+    setTimeout(() => ripple.remove(), 600);
+  });
+});
+</script>
 
 </body>
 </html>
