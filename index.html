@@ -1,273 +1,1704 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mackson Technology</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mackson Technology | Assistência Técnica & Acessórios</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --primary-light: #172a45;
+            --accent: #00d2ff;
+            --accent-glow: rgba(0, 210, 255, 0.3);
+            --secondary-accent: #0072ff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --text-light: #f8fafc;
+            --bg-light: #f4f7fb;
+            --card-bg: #ffffff;
+            --whatsapp-color: #25d366;
+            --instagram-color: #e1306c;
+            --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.04);
+            --shadow-lg: 0 20px 30px -10px rgba(0,0,0,0.12);
+            --radius: 16px;
+        }
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
 
-body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #020617;
-  overflow: hidden;
-  color: white;
-}
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
+        /* Top Bar */
+        .top-bar {
+            background: linear-gradient(90deg, #050c1a 0%, #0a192f 100%);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 8px 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-.container {
-  position: relative;
-  z-index: 2;
-  width: 90%;
-  max-width: 380px;
-  padding: 30px 20px;
-  border-radius: 20px;
-  text-align: center;
-  backdrop-filter: blur(20px);
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(59,130,246,0.2);
-  box-shadow: 0 0 50px rgba(59,130,246,0.2);
-  transform-style: preserve-3d;
-  transition: transform 0.2s;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-.logo {
-  width: 150px;
-  margin-bottom: 10px;
-  filter: drop-shadow(0 0 20px #3b82f6);
-  animation: float 3s ease-in-out infinite;
-}
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-@keyframes float {
-  0%,100% {transform: translateY(0);}
-  50% {transform: translateY(-8px);}
-}
+        .top-bar-info {
+            display: flex;
+            gap: 20px;
+        }
 
-h1 { font-size: 24px; }
+        .top-bar-info span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-p {
-  font-size: 14px;
-  color: #94a3b8;
-  margin-bottom: 25px;
-}
+        /* Header / Navbar */
+        header {
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
 
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
 
-.link {
-  position: relative;
-  padding: 16px;
-  border-radius: 14px;
-  text-decoration: none;
-  color: white;
-  font-weight: 600;
-  overflow: hidden;
-  transition: 0.25s;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary-accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.4rem;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
 
-  background: linear-gradient(145deg, rgba(15,23,42,0.9), rgba(30,41,59,0.6));
-  border: 1px solid rgba(59,130,246,0.2);
-}
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
 
-.link::after {
-  content: "";
-  position: absolute;
-  width: 120%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
-  top: 0;
-  left: -120%;
-  transition: 0.6s;
-}
+        .logo-text .title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
 
-.link:hover::after {
-  left: 120%;
-}
+        .logo-text .subtitle {
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
 
-.link:hover {
-  transform: translateY(-3px) scale(1.03);
-}
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            align-items: center;
+        }
 
-.link:active {
-  transform: scale(0.96);
-}
+        .nav-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-.link svg {
-  transition: 0.3s;
-}
+        .nav-links a:hover {
+            color: var(--accent);
+        }
 
-.link:hover svg {
-  transform: scale(1.2) rotate(5deg);
-}
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
 
-/* CORES */
-.link:nth-child(1):hover {
-  box-shadow: 0 0 25px #25D366;
-  border-color: #25D366;
-}
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-.link:nth-child(2):hover {
-  box-shadow: 0 0 25px #E1306C;
-  border-color: #E1306C;
-}
+        .btn-header {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-.link:nth-child(3):hover {
-  box-shadow: 0 0 25px #3b82f6;
-  border-color: #3b82f6;
-}
+        .btn-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
 
-/* ripple */
-.link span {
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  animation: ripple 0.6s linear;
-  background: rgba(59,130,246,0.5);
-}
+        .btn-header::after {
+            display: none !important;
+        }
 
-@keyframes ripple {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
 
-.footer {
-  margin-top: 20px;
-  font-size: 12px;
-  color: #64748b;
-}
-</style>
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+            color: white;
+            padding: 90px 0 110px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #00d2ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 35px;
+            max-width: 540px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:hover {
+            background: #20ba5a;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 210, 255, 0.05);
+        }
+
+        /* Hero Graphic Card */
+        .hero-card-box {
+            position: relative;
+            background: rgba(23, 42, 69, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+
+        .hero-card-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 210, 255, 0.15);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .hero-card-title h3 {
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .hero-card-title p {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .features-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .features-list li i {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        /* Banner Tagline Bar */
+        .tagline-bar {
+            background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
+            color: white;
+            text-align: center;
+            padding: 16px 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow-md);
+            text-transform: uppercase;
+        }
+
+        .tagline-bar i {
+            margin-right: 10px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+        }
+
+        .section-subtitle {
+            color: var(--secondary-accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Info Badges Bar (Prazos, Garantia, Pagamento) */
+        .info-badges-section {
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .info-badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-badge-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .info-badge-icon {
+            width: 48px;
+            height: 48px;
+            background: #eef2ff;
+            color: var(--secondary-accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .info-badge-text h5 {
+            font-size: 0.95rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .info-badge-text p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* Service Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-accent), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: #f0f7ff;
+            color: var(--secondary-accent);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--secondary-accent);
+            color: white;
+        }
+
+        .service-title h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .service-list {
+            list-style: none;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .service-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #f1f5f9;
+            color: #475569;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-list li:last-child {
+            border-bottom: none;
+        }
+
+        .service-list li i {
+            color: #10b981;
+            font-size: 0.85rem;
+        }
+
+        .service-footer {
+            margin-top: auto;
+            padding-top: 15px;
+        }
+
+        .btn-card {
+            width: 100%;
+            justify-content: center;
+            background: #f8fafc;
+            color: var(--primary);
+            border: 1px solid #cbd5e1;
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+
+        .service-card:hover .btn-card {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Order Banner / Accessories Section */
+        .accessories-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border-radius: 24px;
+            padding: 50px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accessories-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .acc-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .acc-content p {
+            color: #94a3b8;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        .acc-badge {
+            background: rgba(255, 183, 3, 0.15);
+            color: #ffb703;
+            border: 1px solid rgba(255, 183, 3, 0.3);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .acc-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .acc-item-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .acc-item-card i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .acc-item-card span {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials Section (Nova) */
+        .testimonials-section {
+            background-color: var(--bg-light);
+            padding: 80px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 28px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .stars {
+            color: #ffb703;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 4px;
+        }
+
+        .testimonial-text {
+            color: #475569;
+            font-size: 0.95rem;
+            font-style: italic;
+            flex-grow: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 15px;
+        }
+
+        .author-avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--secondary-accent), var(--accent));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .author-info h5 {
+            font-size: 0.95rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .author-info span {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* FAQ Section (Nova) */
+        .faq-section {
+            background-color: #ffffff;
+            padding: 80px 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: #f8fafc;
+            padding: 18px 24px;
+            text-align: left;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+            color: var(--secondary-accent);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: white;
+            padding: 0 24px;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 18px 24px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* Payment Methods & Location Bar (Nova) */
+        .info-footer-bar {
+            background: #1e293b;
+            color: white;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .info-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+
+        .payment-methods h4, .location-box h4 {
+            font-size: 1.1rem;
+            color: white;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-icons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .payment-pill {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .payment-pill i {
+            color: var(--accent);
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            background-color: #ffffff;
+            padding: 80px 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .why-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .why-icon {
+            width: 70px;
+            height: 70px;
+            background: #eef2ff;
+            color: #4f46e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 20px auto;
+        }
+
+        .why-card h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* CTA Box */
+        .cta-section {
+            padding: 80px 0;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .cta-box p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050c1a;
+            color: #94a3b8;
+            padding: 60px 0 30px 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-about p {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            max-width: 320px;
+        }
+
+        .footer-title {
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .footer-contact-item i {
+            width: 35px;
+            height: 35px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .social-btn.ig:hover {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+        }
+
+        .social-btn.wa:hover {
+            background: #25d366;
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 25px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* Floating WhatsApp Button */
+        .float-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        .float-wa:hover {
+            transform: scale(1.1);
+            background: #20ba5a;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero p {
+                margin: 0 auto 35px auto;
+            }
+            .hero-cta {
+                justify-content: center;
+            }
+            .hero-card-box {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            .accessories-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                display: none;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #0a192f;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                gap: 15px;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .accessories-section {
+                padding: 30px 20px;
+            }
+            .acc-items {
+                grid-template-columns: 1fr;
+            }
+            .info-badges-section {
+                margin-top: 20px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<canvas id="bg"></canvas>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-bar-info">
+                <span><i class="fa-solid fa-microchip"></i> Especialistas em Softwares e Manutenção</span>
+                <span><i class="fa-solid fa-clock"></i> Seg a Sáb: 08h às 18h</span>
+            </div>
+            <div class="top-bar-info">
+                <span><i class="fa-brands fa-instagram"></i> @mackson.technology</span>
+            </div>
+        </div>
+    </div>
 
-<div class="container" id="card">
+    <!-- Header / Nav -->
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo-container">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="title">MACKSON</span>
+                    <span class="subtitle">TECHNOLOGY</span>
+                </div>
+            </a>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#acessorios">Acessórios</a></li>
+                <li><a href="#depoimentos">Avaliações</a></li>
+                <li><a href="#faq">Dúvidas</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li>
+                    <a href="https://wa.me/5587981750054?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" class="btn-header">
+                        <i class="fa-brands fa-whatsapp"></i> Orçamento
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
 
-  <img class="logo" src="logo.png">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-shield-halved"></i> Assistência Técnica Especializada
+                </div>
+                <h1>Soluções em Tecnologia para seu <span>Celular & Computador</span></h1>
+                <p>Manutenção de software, formatação, substituição de peças, upgrades e venda de acessórios sob encomenda. Atendimento rápido e garantido!</p>
+                <div class="hero-cta">
+                    <a href="https://wa.me/5587981750054?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento." target="_blank" class="btn btn-whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> Solicitar Orçamento Grátis
+                    </a>
+                    <a href="#servicos" class="btn btn-outline">
+                        Ver Todos os Serviços
+                    </a>
+                </div>
+            </div>
+            <div class="hero-card-box">
+                <div class="hero-card-header">
+                    <div class="hero-card-icon">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <div class="hero-card-title">
+                        <h3>Mackson Technology</h3>
+                        <p>Assistência & Serviços Digitais</p>
+                    </div>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Formatação e Otimização de Sistemas</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Troca de Telas e Baterias (Android e iPhone)</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Upgrades de Hardware (SSD, RAM, HD)</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Remoção de Vírus e Desbloqueio Conta Google</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Capas, Películas e Acessórios sob Encomenda</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-  <h1>Mackson Technology</h1>
-  <p>Assistência técnica em celular e PC</p>
+    <!-- Tagline Bar -->
+    <div class="tagline-bar">
+        <i class="fa-solid fa-rocket"></i> Tecnologia não para, nós também não!
+    </div>
 
-  <div class="links">
+    <!-- Info Badges Bar (Nova) -->
+    <div class="container info-badges-section">
+        <div class="info-badges-grid">
+            <div class="info-badge-item">
+                <div class="info-badge-icon"><i class="fa-solid fa-stopwatch"></i></div>
+                <div class="info-badge-text">
+                    <h5>Agilidade</h5>
+                    <p>Diagnóstico em até 24h</p>
+                </div>
+            </div>
+            <div class="info-badge-item">
+                <div class="info-badge-icon"><i class="fa-solid fa-award"></i></div>
+                <div class="info-badge-text">
+                    <h5>Garantia</h5>
+                    <p>Garantia em todos os serviços</p>
+                </div>
+            </div>
+            <div class="info-badge-item">
+                <div class="info-badge-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                <div class="info-badge-text">
+                    <h5>Coleta & Entrega</h5>
+                    <p>Opção de busca ao domicílio</p>
+                </div>
+            </div>
+            <div class="info-badge-item">
+                <div class="info-badge-icon"><i class="fa-solid fa-credit-card"></i></div>
+                <div class="info-badge-text">
+                    <h5>Facilidade</h5>
+                    <p>Pix ou Cartão parcelado</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a class="link" href="https://wa.me/5587981750054?text=Olá,%20quero%20um%20orçamento" target="_blank">
-      <!-- WhatsApp -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#25D366" viewBox="0 0 24 24">
-        <path d="M20.52 3.48A11.82 11.82 0 0 0 12.05 0C5.43 0 .07 5.36.07 11.98c0 2.11.55 4.17 1.6 5.98L0 24l6.21-1.63a11.93 11.93 0 0 0 5.84 1.49h.01c6.62 0 11.98-5.36 11.98-11.98 0-3.2-1.25-6.21-3.52-8.4z"/>
-      </svg>
-      WhatsApp
+    <!-- Services Section -->
+    <section class="section" id="servicos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Nossas Especialidades</span>
+                <h2 class="section-title">Serviços Profissionais Prestados</h2>
+                <p class="section-desc">Oferecemos assistência completa para computadores, notebooks e smartphones com suporte rápido, transparente e garantia.</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Computers -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon"><i class="fa-solid fa-desktop"></i></div>
+                        <div class="service-title">
+                            <h3>Computadores & Notebooks</h3>
+                        </div>
+                    </div>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Formatação + Instalação de Sistema</li>
+                        <li><i class="fa-solid fa-check"></i> Backup e Recuperação de Arquivos/Dados</li>
+                        <li><i class="fa-solid fa-check"></i> Otimização do PC e Limpeza de Lixo</li>
+                        <li><i class="fa-solid fa-check"></i> Configuração do Windows, Impressora e Wi-Fi</li>
+                        <li><i class="fa-solid fa-check"></i> Clonagem de HD para SSD</li>
+                        <li><i class="fa-solid fa-check"></i> Montagem Completa e Consultoria para PC</li>
+                        <li><i class="fa-solid fa-check"></i> Diagnóstico e Reparo Técnico</li>
+                    </ul>
+                    <div class="service-footer">
+                        <a href="https://wa.me/5587981750054?text=Olá!%20Preciso%20de%20assistência%20para%20meu%20Computador/Notebook." target="_blank" class="btn btn-card">
+                            Consultar este Serviço
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cellphones Software -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                        <div class="service-title">
+                            <h3>Celulares (Software)</h3>
+                        </div>
+                    </div>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Formatação e Restauração de Sistema</li>
+                        <li><i class="fa-solid fa-check"></i> Backup Completo e Transferência de Dados</li>
+                        <li><i class="fa-solid fa-check"></i> Otimização e Limpeza de Aplicativos</li>
+                        <li><i class="fa-solid fa-check"></i> Remoção de Vírus e Anúncios Indesejados</li>
+                        <li><i class="fa-solid fa-check"></i> Desbloqueio e Recuperação de Conta Google (FRP)</li>
+                        <li><i class="fa-solid fa-check"></i> Atualização e Ajustes Gerais do Aparelho</li>
+                        <li><i class="fa-solid fa-check"></i> Configuração de E-mail e Contas</li>
+                    </ul>
+                    <div class="service-footer">
+                        <a href="https://wa.me/5587981750054?text=Olá!%20Preciso%20de%20suporte%20de%20software%20para%20meu%20celular." target="_blank" class="btn btn-card">
+                            Consultar este Serviço
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hardware & Upgrades -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon"><i class="fa-solid fa-microchip"></i></div>
+                        <div class="service-title">
+                            <h3>Hardware & Manutenção</h3>
+                        </div>
+                    </div>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Instalação / Substituição de SSD e HD</li>
+                        <li><i class="fa-solid fa-check"></i> Instalação e Upgrade de Memória RAM</li>
+                        <li><i class="fa-solid fa-check"></i> Limpeza Interna Preventiva e Otimização</li>
+                        <li><i class="fa-solid fa-check"></i> Substituição de Pasta Térmica</li>
+                        <li><i class="fa-solid fa-check"></i> Reparo de Gabinete, Fontes e Ventoinha</li>
+                        <li><i class="fa-solid fa-check"></i> Diagnóstico Técnico Avançado</li>
+                    </ul>
+                    <div class="service-footer">
+                        <a href="https://wa.me/5587981750054?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20Manutenção/Hardware." target="_blank" class="btn btn-card">
+                            Consultar este Serviço
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Screen Replacement -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                        <div class="service-title">
+                            <h3>Troca de Tela</h3>
+                        </div>
+                    </div>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Android Simples, Intermediário e Superior</li>
+                        <li><i class="fa-solid fa-check"></i> iPhone 6 / 7 / 8 / SE</li>
+                        <li><i class="fa-solid fa-check"></i> iPhone X / XR / XS / 11</li>
+                        <li><i class="fa-solid fa-check"></i> iPhone 12 / 13 / 14 / 15 e superiores</li>
+                        <li><i class="fa-solid fa-check"></i> Opções: Traga sua peça ou fornecemos para você</li>
+                        <li><i class="fa-solid fa-check"></i> Garantia estendida conforme fornecedor</li>
+                    </ul>
+                    <div class="service-footer">
+                        <a href="https://wa.me/5587981750054?text=Olá!%20Gostaria%20de%20saber%20valores%20para%20troca%20de%20tela." target="_blank" class="btn btn-card">
+                            Consultar este Serviço
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Battery Replacement -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon"><i class="fa-solid fa-battery-full"></i></div>
+                        <div class="service-title">
+                            <h3>Troca de Bateria</h3>
+                        </div>
+                    </div>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Substituição para Androids de todas as marcas</li>
+                        <li><i class="fa-solid fa-check"></i> Troca de bateria para iPhone (Linha 6 à linha 15+)</li>
+                        <li><i class="fa-solid fa-check"></i> Testes de saúde de bateria e consumo da placa</li>
+                        <li><i class="fa-solid fa-check"></i> Peças de alta qualidade e durabilidade</li>
+                        <li><i class="fa-solid fa-check"></i> Mão de obra qualificada</li>
+                    </ul>
+                    <div class="service-footer">
+                        <a href="https://wa.me/5587981750054?text=Olá!%20Preciso%20trocar%20a%20bateria%20do%20meu%20celular." target="_blank" class="btn btn-card">
+                            Consultar este Serviço
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Digital Documents -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon"><i class="fa-solid fa-file-contract"></i></div>
+                        <div class="service-title">
+                            <h3>Documentos & Serviços Digitais</h3>
+                        </div>
+                    </div>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Edição e Formatação Completa de Documentos</li>
+                        <li><i class="fa-solid fa-check"></i> Elaboração de Currículo Profissional</li>
+                        <li><i class="fa-solid fa-check"></i> Criação de Artes para Redes Sociais</li>
+                        <li><i class="fa-solid fa-check"></i> Criação e Edição de Apresentações (Canva/PPT)</li>
+                        <li><i class="fa-solid fa-check"></i> Conversão de Arquivos (PDF, Word, Excel, etc.)</li>
+                    </ul>
+                    <div class="service-footer">
+                        <a href="https://wa.me/5587981750054?text=Olá!%20Preciso%20de%20serviços%20de%20edição%20de%20documentos/artes." target="_blank" class="btn btn-card">
+                            Consultar este Serviço
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Accessories & Custom Orders Section -->
+    <section class="container" id="acessorios">
+        <div class="accessories-section">
+            <div class="accessories-grid">
+                <div class="acc-content">
+                    <span class="acc-badge"><i class="fa-solid fa-star"></i> Sob Encomenda</span>
+                    <h2>Capas, Películas e Acessórios Premium</h2>
+                    <p>Trabalhamos com encomenda personalizada de capas anti-impacto, películas de vidro/cerâmica/privacidade, cabos, carregadores e periféricos para seu celular ou computador. Peça o que precisa e entregamos a você!</p>
+                    <a href="https://wa.me/5587981750054?text=Olá!%20Gostaria%20de%20encomendar%20um%20acessório%20(capa,%20película,%20etc)." target="_blank" class="btn btn-whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> Fazer Encomenda via WhatsApp
+                    </a>
+                </div>
+                <div class="acc-items">
+                    <div class="acc-item-card">
+                        <i class="fa-solid fa-mobile-retro"></i>
+                        <span>Capas Personalizadas & Anti-Impacto</span>
+                    </div>
+                    <div class="acc-item-card">
+                        <i class="fa-solid fa-shield"></i>
+                        <span>Películas 3D, Privacidade e Cerâmica</span>
+                    </div>
+                    <div class="acc-item-card">
+                        <i class="fa-solid fa-plug"></i>
+                        <span>Carregadores Rápidos e Cabos reforçados</span>
+                    </div>
+                    <div class="acc-item-card">
+                        <i class="fa-solid fa-headset"></i>
+                        <span>Fones, Mouses e Periféricos de PC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section (Nova) -->
+    <section class="testimonials-section" id="depoimentos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">O que dizem sobre nós</span>
+                <h2 class="section-title">Depoimentos dos Clientes</h2>
+                <p class="section-desc">A satisfação de quem confia no nosso trabalho técnico.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Formatou meu computador e instalou o SSD super rápido. O notebook ficou parecendo novo, recomendo demais o serviço!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div class="author-info">
+                            <h5>Rafael Silva</h5>
+                            <span>Cliente de Manutenção de PC</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Troquei a tela do meu iPhone e encomendei a capa anti-impacto. Atendimento atencioso e transparência do início ao fim."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h5>Mariana Costa</h5>
+                            <span>Cliente de Troca de Tela</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Conseguiu remover a conta Google e restaurar todo o meu celular que estava travado. Excelente profissional!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C</div>
+                        <div class="author-info">
+                            <h5>Carlos Eduardo</h5>
+                            <span>Cliente de Suporte de Software</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section (Nova) -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Tire suas dúvidas</span>
+                <h2 class="section-title">Perguntas Frequentes</h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quanto tempo demora a manutenção ou troca de peças?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>A maioria dos serviços de software, formatação e troca de telas/baterias simples são finalizados em poucas horas ou no mesmo dia. Serviços com peças sob encomenda dependem do prazo de chegada dos componentes.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Meus dados e arquivos estarão seguros durante o reparo?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim! Mantemos sigilo absoluto sobre os dados de nossos clientes. Sempre que necessário, realizamos o backup completo das suas fotos e documentos antes de qualquer procedimento de sistema.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Os serviços possuem garantia?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim, todos os nossos serviços de manutenção e peças instaladas acompanham garantia contra defeitos de fabricação ou de aplicação.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Posso levar a minha própria peça para troca?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Com certeza! Oferecemos a opção de cobrar apenas a mão de obra caso você já possua a tela, bateria ou SSD comprado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods & Location Info Bar (Nova) -->
+    <div class="info-footer-bar">
+        <div class="container">
+            <div class="info-footer-grid">
+                <div class="payment-methods">
+                    <h4><i class="fa-solid fa-wallet"></i> Formas de Pagamento Aceitas</h4>
+                    <div class="payment-icons">
+                        <span class="payment-pill"><i class="fa-solid fa-pix"></i> Pix</span>
+                        <span class="payment-pill"><i class="fa-solid fa-credit-card"></i> Cartão de Crédito</span>
+                        <span class="payment-pill"><i class="fa-solid fa-barcode"></i> Boleto / Débito</span>
+                        <span class="payment-pill"><i class="fa-solid fa-money-bill-wave"></i> Dinheiro</span>
+                    </div>
+                </div>
+                <div class="location-box">
+                    <h4><i class="fa-solid fa-location-dot"></i> Atendimento & Suporte</h4>
+                    <p style="font-size:0.9rem; color:#94a3b8;">Atendimento presencial e remoto via agendamento. Consulte opção de busca e entrega em domicílio para a sua região via WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <section class="why-us">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Por que nos escolher</span>
+                <h2 class="section-title">Qualidade e Confiança Garantidas</h2>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon"><i class="fa-solid fa-user-shield"></i></div>
+                    <h4>Segurança Total</h4>
+                    <p>Seus dados e arquivos mantidos com absoluta privacidade e sigilo durante qualquer tipo de manutenção.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h4>Agilidade de Entrega</h4>
+                    <p>Sabemos da importância do seu equipamento. Por isso, oferecemos diagnósticos e reparos rápidos.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fa-solid fa-certificate"></i></div>
+                    <h4>Peças Qualificadas</h4>
+                    <p>Trabalhamos apenas com peças testadas e com garantia de fábrica para assegurar o melhor desempenho.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fa-solid fa-comments"></i></div>
+                    <h4>Atendimento Direto</h4>
+                    <p>Sem burocracia. Fale diretamente com o técnico pelo WhatsApp e tire todas as suas dúvidas na hora.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contato">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Precisa de Ajuda Técnica Agora?</h2>
+                <p>Entre em contato pelo WhatsApp e faça o seu orçamento sem compromisso. Teremos o maior prazer em lhe atender!</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/5587981750054?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" class="btn btn-whatsapp btn-lg">
+                        <i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp (87) 98175-0054
+                    </a>
+                    <a href="https://instagram.com/mackson.technology" target="_blank" class="btn btn-outline">
+                        <i class="fa-brands fa-instagram"></i> Siga no Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="title">MACKSON</span>
+                            <span class="subtitle">TECHNOLOGY</span>
+                        </div>
+                    </div>
+                    <p>Assistência Técnica Especializada em Software e Hardware para Celulares, Notebooks e Computadores. Acessórios sob encomenda com alta qualidade.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/5587981750054" target="_blank" class="social-btn wa"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="https://instagram.com/mackson.technology" target="_blank" class="social-btn ig"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Navegação</h4>
+                    <ul class="footer-links">
+                        <li><a href="#servicos">Serviços Prestados</a></li>
+                        <li><a href="#acessorios">Acessórios sob Encomenda</a></li>
+                        <li><a href="#depoimentos">Depoimentos</a></li>
+                        <li><a href="#faq">Perguntas Frequentes</a></li>
+                        <li><a href="#contato">Solicitar Orçamento</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Contato & Horários</h4>
+                    <div class="footer-contact-item">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>(87) 98175-0054</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>@mackson.technology</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Seg - Sáb: 08:00 às 18:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mackson Technology. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/5587981750054?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20tirar%20uma%20dúvida." class="float-wa" target="_blank" title="Fale Conosco no WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <a class="link" href="https://instagram.com/mackson.technology" target="_blank">
-      <!-- Instagram -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#E1306C" viewBox="0 0 24 24">
-        <path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5z"/>
-      </svg>
-      Instagram
-    </a>
+    <!-- Interatividade JavaScript -->
+    <script>
+        // Toggle do Menu Mobile
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
 
-    <a class="link" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDg4ODYyMjAxMTM3MTgy?igsh=MXFyZXgzejl5enRzbg==" target="_blank">
-      <!-- Verificado -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#3b82f6" viewBox="0 0 24 24">
-        <path d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 20 12 16.9 5.82 20 7 12.14 2 7.27z"/>
-      </svg>
-      Serviços Finalizados
-    </a>
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
 
-  </div>
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                if(icon) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
 
-  <div class="footer">
-    © 2026 Mackson Technology
-  </div>
-
-</div>
-
-<script>
-// FUNDO PARTICULAS
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for (let i = 0; i < 80; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 2,
-    dx: (Math.random() - 0.5),
-    dy: (Math.random() - 0.5)
-  });
-}
-
-function animate() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  particles.forEach(p => {
-    p.x += p.dx;
-    p.y += p.dy;
-
-    if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
-    if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
-
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-    ctx.fillStyle = "#3b82f6";
-    ctx.fill();
-  });
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-// PARALLAX
-const card = document.getElementById("card");
-
-document.addEventListener("mousemove", (e) => {
-  let x = (window.innerWidth / 2 - e.clientX) / 25;
-  let y = (window.innerHeight / 2 - e.clientY) / 25;
-  card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-});
-
-// RIPPLE
-document.querySelectorAll(".link").forEach(btn => {
-  btn.addEventListener("click", function(e) {
-    let ripple = document.createElement("span");
-    ripple.style.left = e.offsetX + "px";
-    ripple.style.top = e.offsetY + "px";
-    this.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
-  });
-});
-</script>
-
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>
